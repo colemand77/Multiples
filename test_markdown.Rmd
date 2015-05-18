@@ -1,0 +1,65 @@
+---
+title: "Examining Multiples"
+author: "DC"
+date: "Saturday, May 16, 2015"
+output:
+  html_document:
+    theme: readable
+runtime: shiny
+---
+
+#Overview
+
+The following are some interactive charts to examine the historical and current trend of EBITDA, CPS, and EPS multiples for PKD and its peers.
+In each section, the line chart represents the historical rolling (Price or EV) over the Next Twelve Months _(NTM)_ of estimates.  
+
+### The Company selecter
+On the above right is a dropbox to select the performance of PKD and several of its peers
+
+### The Line Chart
+Click and drag on this chart to select a window of time to be represented on the boxplot _(to right)_ and histogram _(below)_
+Use the slider beneath the time series chart to move the selected periodicity through time.
+Double click the chart to reset the zoom level
+
+### The BoxPlot
+To the right of the line chart is a Boxplot for the time series information in the line chart.  
+The Median value is represented by the bold line in the middle of the box and indicated by the blue number
+The upper and lower quartiles are represented by the edges of the box.
+Dots represent outliers
+
+### The Histogram
+Below the line chart are dynamic histgrams, which update according to the data currently visible in the line chart.
+This illustrates the distribution of the multiples, and provide a more complete understanding than a median or mean number alone.
+
+
+
+#EV/EBITDA Multiples
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+load("./rawDF.RData")
+source("./ts_widget.R")
+tsExplore(raw, gmin = 3, gmax = 10)
+
+```
+
+
+#P/E multiples
+_Note that earnings for oil service companys are frequently low or negative, making historical trend analysis of multiples difficult. A more representative analysis would involve earnings yield, which is available_
+```{r, echo=FALSE, message=FALSE, warning= FALSE}
+load("./PE_TS.RData")
+
+tsExplore(PE_TS)
+
+```
+
+#P/CPS Mutliples
+```{r, echo=FALSE, message=FALSE, warning= FALSE}
+load("./CF_TS.RData")
+
+tsExplore(CF_TS)
+
+```
+
+
+
+
